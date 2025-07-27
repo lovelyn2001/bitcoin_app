@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bitcoin_app/coin_data.dart';
+import 'package:bitcoin_app/services/networking.dart';
 
 class PriceScreen extends StatefulWidget {
   const PriceScreen({super.key});
@@ -10,6 +11,9 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
+  String selectedCoin = 'BTC';
+  int rate = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +44,7 @@ class _PriceScreenState extends State<PriceScreen> {
                     horizontal: 28.0,
                   ),
                   child: Text(
-                    '1 BTC = ? $selectedCurrency',
+                    '$selectedCoin = $rate $selectedCurrency',
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -70,10 +74,18 @@ class _PriceScreenState extends State<PriceScreen> {
                     )
                     .toList(),
 
-                onSelected: (value) {
+                onSelected: (value) async {
+                  NetworkHelper networking = NetworkHelper();
+                  double? result = await networking.getExchangeRate(
+                    selectedCoin,
+                    selectedCurrency,
+                  );
+
                   setState(() {
                     selectedCurrency = value ?? selectedCurrency;
+                    rate = result.toInt();
                     print(selectedCurrency);
+                    print(result);
                   });
                 },
               ),
