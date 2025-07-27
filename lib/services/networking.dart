@@ -1,3 +1,6 @@
+// networking.dart
+// Handles API requests and networking logic for fetching cryptocurrency data.
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -9,10 +12,10 @@ String data = '';
 double value = 0.0;
 
 class NetworkHelper {
-  Future<double> getExchangeRate(String quote, String currency) async {
+  Future<double> getExchangeRate(String bquote, String currency) async {
     try {
       http.Response response = await http.get(
-        Uri.parse('$baseUrl$quote-$currency&api_key=$apiKey'),
+        Uri.parse('$baseUrl$bquote-$currency&api_key=$apiKey'),
       );
 
       if (response.statusCode == 200) {

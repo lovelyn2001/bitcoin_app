@@ -1,3 +1,6 @@
+// main.dart
+// Entry point of the Bitcoin app. Sets up the main application widget and navigation.
+
 import 'package:flutter/material.dart';
 import 'package:bitcoin_app/screens/price-screen.dart';
 

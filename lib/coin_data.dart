@@ -1,3 +1,6 @@
+// coin_data.dart
+// This file contains the list of supported cryptocurrencies and related data for the Bitcoin app.
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',

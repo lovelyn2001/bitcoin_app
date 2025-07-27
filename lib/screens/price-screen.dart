@@ -1,3 +1,6 @@
+// price-screen.dart
+// This screen displays the current prices of selected cryptocurrencies.
+
 import 'package:flutter/material.dart';
 import 'package:bitcoin_app/coin_data.dart';
 import 'package:bitcoin_app/services/networking.dart';
@@ -30,27 +33,33 @@ class _PriceScreenState extends State<PriceScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-              child: Card(
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                color: Theme.of(context).colorScheme.secondary,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
-                    horizontal: 28.0,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: cryptoList.map((crypto) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+                  child: Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15.0,
+                        horizontal: 28.0,
+                      ),
+                      child: Text(
+                        '$crypto = $rate $selectedCurrency',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    '$selectedCoin = $rate $selectedCurrency',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+                );
+              }).toList(),
             ),
+
             Container(
               height: 150.0,
               color: Theme.of(context).colorScheme.primary,
